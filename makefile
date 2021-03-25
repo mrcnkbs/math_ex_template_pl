@@ -1,8 +1,11 @@
 filename=file
 
-tex: file.tex
-	pdflatex $(filename).tex
-pdf: file.pdf
+$(filename).pdf: $(filename).dvi
+	dvipdfm $(filename).dvi
 	xreader $(filename).pdf
+
+$(filename).dvi: $(filename).tex
+	latex $(filename)
+
 clean:
 	rm *.log *.aux
